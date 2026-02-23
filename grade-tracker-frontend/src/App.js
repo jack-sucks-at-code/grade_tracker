@@ -8,6 +8,7 @@ function App() {
   const [courseData, setCourseData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentView, setCurrentView] = useState('grades'); // 'grades' or 'settings'
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
 
   useEffect(() => {
     loadCourse();
@@ -16,7 +17,7 @@ function App() {
   const loadCourse = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8000/course/current");
+      const response = await fetch(`${apiBaseUrl}/course/current`);
       if (response.ok) {
         const data = await response.json();
         setCourseData(data);
